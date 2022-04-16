@@ -15,15 +15,17 @@ namespace Keeper.Repositories
     }
 
 
-    internal int Create(Keep keepData)
+    public Keep Create(Keep keepData)
     {
       string sql = @"
       INSERT INTO keeps
-      (id, creatorId, name, description, img, views, kept)
+      (name, description, img, views, kept, creatorId)
       VALUES
-      (@Id, @CreatorId, @Name, @Description, @Img, @Views, @Kept);
+      (@Name, @Description, @Img, @Views, @Kept, @CreatorId);
       SELECT LAST_INSERT_ID();";
-      return _db.ExecuteScalar<int>(sql, keepData);
+      int id = _db.ExecuteScalar<int>(sql, keepData);
+      keepData.Id = id;
+      return keepData;
     }
 
     public List<Keep> GetAllKeeps()

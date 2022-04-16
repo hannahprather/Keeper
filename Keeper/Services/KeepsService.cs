@@ -12,10 +12,9 @@ namespace Keeper.Services
       _kRepo = kRepo;
     }
 
-    public Keep Create(Keep keepData)
+    internal Keep Create(Keep keepData)
     {
-      keepData.Id = _kRepo.Create(keepData);
-      return keepData;
+      return _kRepo.Create(keepData);
     }
 
     internal List<Keep> GetAllKeeps()

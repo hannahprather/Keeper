@@ -21,7 +21,7 @@ namespace Keeper.Controllers
 
     [HttpPost]
     [Authorize]
-    public async Task<ActionResult<Keep>> Create([FromBody] Keep keepData)
+    public async Task<ActionResult<Keep>> CreateAsync([FromBody] Keep keepData)
     {
       try
       {
@@ -29,10 +29,9 @@ namespace Keeper.Controllers
         keepData.CreatorId = userInfo.Id;
         Keep created = _ks.Create(keepData);
         created.Creator = userInfo;
-        return Ok(created);
-
+        return Created($"api/keeps/{created.Id}", created);
       }
-      catch (System.Exception e)
+      catch (Exception e)
       {
         return BadRequest(e.Message);
       }
@@ -64,6 +63,8 @@ namespace Keeper.Controllers
         return BadRequest(e.Message);
       }
     }
+
+
 
   }
 }
