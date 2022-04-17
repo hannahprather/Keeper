@@ -16,4 +16,3 @@ CREATE TABLE IF NOT EXISTS keeps (
   creatorId VARCHAR(255) NOT NULL,
   FOREIGN KEY (creatorId) REFERENCES accounts(id) ON DELETE CASCADE
 ) default charset utf8 COMMENT '';
-DROP TABLE keeps
