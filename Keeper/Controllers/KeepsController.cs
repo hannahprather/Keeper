@@ -51,11 +51,11 @@ namespace Keeper.Controllers
     }
 
     [HttpGet("{id}")]
-    public ActionResult<Keep> Get(int id)
+    public ActionResult<Keep> GetById(int id)
     {
       try
       {
-        Keep keep = _ks.Get(id);
+        Keep keep = _ks.GetById(id);
         return Ok(keep);
       }
       catch (Exception e)
@@ -64,7 +64,20 @@ namespace Keeper.Controllers
       }
     }
 
-
-
+    [HttpDelete("{id}")]
+    [Authorize]
+    public async Task<ActionResult<string>> Delete(int id)
+    {
+      try
+      {
+        Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+        _ks.Delete(id, userInfo.Id);
+        return Ok("Delorted");
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
   }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Keeper.Models;
 using Keeper.Repositories;
@@ -22,9 +23,22 @@ namespace Keeper.Services
       return _kRepo.GetAllKeeps();
     }
 
-    internal Keep Get(int id)
+    internal Keep GetById(int id)
     {
-      return _kRepo.Get(id);
+      return _kRepo.GetById(id);
+    }
+
+    internal void Delete(int id, string userId)
+    {
+      Keep original = GetById(id);
+      if (userId == original.CreatorId)
+      {
+        _kRepo.Delete(id);
+      }
+      else
+      {
+        throw new Exception("invalid");
+      }
     }
   }
 }

@@ -44,7 +44,7 @@ namespace Keeper.Repositories
       }).ToList();
     }
 
-    public Keep Get(int id)
+    public Keep GetById(int id)
     {
       string sql = @"
       SELECT 
@@ -59,6 +59,12 @@ namespace Keeper.Repositories
         kp.Creator = prof;
         return kp;
       }, new { id }).FirstOrDefault();
+    }
+
+    public void Delete(int id)
+    {
+      string sql = "DELETE FROM keeps WHERE id = @Id LIMIT 1;";
+      _db.Execute(sql, new { id });
     }
   }
 }
