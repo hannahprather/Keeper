@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -59,6 +60,24 @@ namespace Keeper.Repositories
         kp.Creator = prof;
         return kp;
       }, new { id }).FirstOrDefault();
+    }
+
+    internal Keep Update(Keep original)
+    {
+      string sql = @"
+      UPDATE keeps
+      SET
+      name = @Name,
+      description = @Description,
+      img = @Img
+      WHERE id = @Id;
+      ";
+      int rows = _db.Execute(sql, original);
+      if (rows > 0)
+      {
+        return original;
+      }
+      throw new Exception("Sql error ham!!!! no updates");
     }
 
     public void Delete(int id)

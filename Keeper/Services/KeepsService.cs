@@ -25,7 +25,25 @@ namespace Keeper.Services
 
     internal Keep GetById(int id)
     {
-      return _kRepo.GetById(id);
+      Keep found = _kRepo.GetById(id);
+      if (found == null)
+      {
+        throw new Exception("does not exist doggie");
+      }
+      return found;
+    }
+
+    internal Keep Update(Keep updateData)
+    {
+      Keep original = GetById(updateData.Id);
+      if (updateData.CreatorId != original.CreatorId)
+      {
+        throw new Exception("Cannot Edit, Not your restaurant");
+      }
+      original.Name = updateData.Name ?? original.Name;
+      original.Description = updateData.Description ?? original.Description;
+      original.Img = updateData.Img ?? original.Img;
+      return _kRepo.Update(original);
     }
 
     internal void Delete(int id, string userId)
@@ -40,5 +58,7 @@ namespace Keeper.Services
         throw new Exception("invalid");
       }
     }
+
+
   }
 }
