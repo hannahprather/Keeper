@@ -38,5 +38,10 @@ namespace Keeper.Controllers
 
     // [HttpGet("{id}")]
 
+
+
+    // [HttpDelete("{id}")]
+    // [Authorize]
+
   }
 }
