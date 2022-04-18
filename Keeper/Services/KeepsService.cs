@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Keeper.Models;
 using Keeper.Repositories;
 
@@ -59,6 +60,9 @@ namespace Keeper.Services
       }
     }
 
-
+    // internal List<Keep> GetMyKeeps(string accountId, string userId)
+    // {
+    //   return _kRepo.GetMyKeeps(accountId).ToList().FindAll(k => k.CreatorId == userId || accountId);
+    // }
   }
 }

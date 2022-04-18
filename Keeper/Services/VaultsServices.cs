@@ -21,7 +21,7 @@ namespace Keeper.Services
     }
 
 
-    //TODO fix all these if statements bo.. this code looks hella messy
+    //TODO fix all these if statements bro.. this code looks hella messy
     internal Vault GetVaultById(int id, string userId)
     {
       Vault foundVault = _vRepo.GetVaultById(id);
@@ -84,5 +84,7 @@ namespace Keeper.Services
       }
 
     }
+
+
   }
 }
