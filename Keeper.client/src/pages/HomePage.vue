@@ -1,9 +1,7 @@
 <template>
   <div class="container">
-    <div class="row keeps">
-      <div v-for="k in keeps" :key="k.id">
-        <Keeps :keeps="k" />
-      </div>
+    <div class="row justify-content-center">
+      <keeps v-for="k in keeps" :key="k.id" :keep="k" />
     </div>
   </div>
 </template>
@@ -14,7 +12,9 @@ import { AppState } from "../AppState"
 import { logger } from "../utils/Logger"
 import Pop from "../utils/Pop"
 import { keepsService } from "../services/KeepsService"
+import Keeps from "../components/Keeps.vue"
 export default {
+  components: { Keeps },
   name: 'Home',
   setup() {
     onMounted(async () => {
@@ -34,21 +34,4 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.home {
-  display: grid;
-  height: 80vh;
-  place-content: center;
-  text-align: center;
-  user-select: none;
-  .home-card {
-    width: 50vw;
-    > img {
-      height: 200px;
-      max-width: 200px;
-      width: 100%;
-      object-fit: contain;
-      object-position: center;
-    }
-  }
-}
 </style>
