@@ -86,17 +86,16 @@ namespace Keeper.Repositories
       _db.Execute(sql, new { id });
     }
 
-    // internal List<Keep> GetMyKeeps(string AccountId)
-    // {
-    //   string sql = @"
-    //   SELECT 
-    //   K.*,
-    //   a.* FROM keeps k
-    //   JOIN accounts a ON k.creatorId = a.id
-    //   WHERE k.creatorId = @id;";
-
-
-
-    // }
+    internal IEnumerable<Keep> GetKeepsByAccount(string accountId)
+    {
+      string sql = @"
+      SELECT
+      k.*,
+      a.*
+      FROM keeps k
+      JOIN accounts a ON k.creatorId = a.id
+      WHERE k.creatorId = @accountId;";
+      return _db.Query<Keep, Account, Keep>(sql, (keep, profile) => { keep.Creator = profile; return keep; }, new { accountId }, splitOn: "id");
+    }
   }
 }

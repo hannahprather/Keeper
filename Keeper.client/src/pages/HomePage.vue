@@ -1,9 +1,8 @@
 <template>
-  <div class="home container">
-    <div class="row justify-content-center">
+  <div class="container">
+    <div class="row keeps">
       <div v-for="k in keeps" :key="k.id">
-        {{ k.name }}
-        <div class="bg-dark text-light"></div>
+        <Keeps :keeps="k" />
       </div>
     </div>
   </div>

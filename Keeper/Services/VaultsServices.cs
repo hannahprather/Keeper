@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Keeper.Models;
 using Keeper.Repositories;
 
@@ -25,7 +26,7 @@ namespace Keeper.Services
     internal Vault GetVaultById(int id, string userId)
     {
       Vault foundVault = _vRepo.GetVaultById(id);
-      Account creator = _repo.GetAccountById(foundVault.CreatorId);
+      Account creator = _repo.GetById(foundVault.CreatorId);
       foundVault.Creator = creator;
 
       if (foundVault == null)
@@ -84,7 +85,10 @@ namespace Keeper.Services
       }
 
     }
-
+    internal object GetVaultsByAccount(string accountId, string userId)
+    {
+      return _vRepo.GetVaultsByAccount(accountId).ToList().FindAll(v => v.CreatorId == userId || v.CreatorId == accountId && v.IsPrivate == false);
+    }
 
   }
 }

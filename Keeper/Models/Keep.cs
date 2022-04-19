@@ -12,5 +12,9 @@ namespace Keeper.Models
     public int Kept { get; set; } = 0;
     public Account Creator { get; set; }
   }
+  public class VaultKeepViewModel : Keep
+  {
+    public int VaultKeepId { get; set; }
+  }
 }
 

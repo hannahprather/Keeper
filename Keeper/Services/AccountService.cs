@@ -47,5 +47,25 @@ namespace Keeper.Services
       }
       return account;
     }
+    internal object GetProfileById(string accountId)
+    {
+      Account profile = _repo.GetProfileById(accountId);
+      if (profile == null)
+      {
+        throw new Exception("you do not exist.. we are all in a simulation");
+      }
+      return profile;
+
+    }
+
+    //  internal object GetMyVaults(Account userInfo)
+    //  {
+    //    Account vaults = _repo.GetMyVaults(userInfo);
+    //    if 
+    //     {
+    //       throw new Exception("does not exist doggie");
+    //     }
+    //     return vaults;
+    //   }
   }
 }

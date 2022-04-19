@@ -60,9 +60,9 @@ namespace Keeper.Services
       }
     }
 
-    // internal List<Keep> GetMyKeeps(string accountId, string userId)
-    // {
-    //   return _kRepo.GetMyKeeps(accountId).ToList().FindAll(k => k.CreatorId == userId || accountId);
-    // }
+    internal List<Keep> GetKeepsByAccount(string accountId, string userId)
+    {
+      return _kRepo.GetKeepsByAccount(accountId).ToList().FindAll(k => k.CreatorId == userId || k.CreatorId == accountId);
+    }
   }
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Data;
 using Dapper;
 using Keeper.Models;
@@ -54,5 +55,18 @@ namespace Keeper.Repositories
       return affectedRows > 0;
 
     }
+    internal IEnumerable<Vault> GetVaultsByAccount(string accountId)
+    {
+      string sql = @"
+      SELECT v.*,
+      a.*
+      FROM vaults v
+      JOIN accounts a
+      ON v.creatorId = a.id
+      WHERE v.creatorId = @accountId;";
+      return _db.Query<Vault, Account, Vault>(sql, (vault, account) => { vault.Creator = account; return vault; }, new { accountId }, splitOn: "id");
+
+    }
+
   }
 }

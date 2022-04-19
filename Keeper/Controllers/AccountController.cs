@@ -33,7 +33,22 @@ namespace Keeper.Controllers
         return BadRequest(e.Message);
       }
     }
+
+    // [HttpGet("/vaults")]
+    // [Authorize]
+    // public async Task<ActionResult<Account>> GetMyVaults()
+    // {
+    //   try
+    //   {
+    //     Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+    //     return Ok(_accountService.GetMyVaults(userInfo));
+    //   }
+    //   catch (Exception e)
+    //   {
+
+    //     return BadRequest(e.Message);
+    //   }
+    // }
+
   }
-
-
 }
