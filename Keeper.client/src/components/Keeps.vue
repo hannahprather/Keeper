@@ -1,16 +1,15 @@
 <template>
   <div
-    class="row row-cols-1 row-cols-md-3 g-4"
+    class="row pt-3 row-cols-1 row-cols-md-3 g-4"
     data-bs-toggle="modal"
     data-bs-target="#active-keep"
     @click="setActive"
   >
-    <div class="col">
-      <div class="card h-100">
-        <img :src="keep.img" class="card-img-top" alt="..." />
-        <div class="card-body">
-          <h5 class="card-title">{{ keep.name }}</h5>
-        </div>
+    <div class="card bg-dark text-white">
+      <img :src="keep.img" class="card-img" alt="..." />
+      <div class="card-img-overlay">
+        <h5 class="card-title">{{ keep.name }}</h5>
+        <p class="card-text"></p>
       </div>
     </div>
   </div>
@@ -48,3 +47,14 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.masonry-with-columns {
+  columns: 6 200px;
+  column-gap: 1rem;
+  div {
+    display: inline-block;
+    width: 100%;
+  }
+}
+</style>

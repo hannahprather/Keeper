@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="row justify-content-center">
+    <div class="masonry-with-columns py-2">
       <keeps v-for="k in keeps" :key="k.id" :keep="k" />
     </div>
   </div>
@@ -33,5 +33,13 @@ export default {
 
 </script>
 
-<style scoped lang="scss">
-</style>
+<style lang="scss" scoped>
+.masonry-with-columns {
+  columns: 6 200px;
+  column-gap: 1rem;
+  div {
+    display: inline-block;
+    width: 100%;
+  }
+}
+</style>>

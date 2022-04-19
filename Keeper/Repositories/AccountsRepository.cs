@@ -54,11 +54,10 @@ namespace Keeper.Repositories
     internal Account GetProfileById(string accountId)
     {
       string sql = @"
-            SELECT * FROM
-            accounts
-            Where id = @AccountId;";
+      SELECT * FROM
+      accounts
+      WHERE id = @AccountId;";
       return _db.QueryFirstOrDefault<Account>(sql, new { accountId });
-
     }
 
 
