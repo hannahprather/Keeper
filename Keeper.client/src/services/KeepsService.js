@@ -8,7 +8,12 @@ class KeepsService {
     logger.log('getall keeps', res.data)
     AppState.keeps = res.data
   }
+  async setActive(id) {
+    const res = await api.get(`api/keeps/${id}`)
+    AppState.activeKeep = res.data
+    logger.log('set active', AppState.activeKeep)
 
+
+  }
 }
-
 export const keepsService = new KeepsService()
