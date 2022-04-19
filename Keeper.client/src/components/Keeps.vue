@@ -2,7 +2,7 @@
   <div
     class="row row-cols-1 row-cols-md-3 g-4"
     data-bs-toggle="modal"
-    data-bs-target="#active-restaurant"
+    data-bs-target="#active-keep"
     @click="setActive"
   >
     <div class="col">
