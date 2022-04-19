@@ -30,5 +30,32 @@ namespace Keeper.Services
       return _vkRepo.GetKeepsByVaultId(id);
     }
 
+    internal VaultKeep GetKeepById(int id)
+    {
+      return _vkRepo.GetKeepById(id);
+    }
+
+
+
+    internal string DeleteVaultKeep(int id, Account userInfo)
+    {
+      VaultKeep remove = _vkRepo.GetKeepById(id);
+      if (remove == null)
+      {
+        throw new Exception("not a real id my guuuy");
+      }
+      else if (remove.CreatorId != userInfo.Id)
+      {
+        throw new Exception("HANDS OFF!!! NO TOUCHING WHAT ISNT YOURS");
+      }
+      else if (_vkRepo.DeleteVaultKeep(id))
+      {
+        return "Delorted";
+      }
+      else
+      {
+        return "Error could not be delorted";
+      }
+    }
   }
 }
