@@ -17,7 +17,9 @@
                 {{ activeKeep.name }}
               </h3>
               <div class="d-flex justify-content-around">
-                <i class="mdi mdi-eye text-danger" alt="views"></i>
+                <i class="mdi mdi-eye text-danger" alt="views">
+                  {{ activeKeep.views }}
+                </i>
                 <i class="mdi mdi-key text-danger" alk="saves"></i>
               </div>
               <p>{{ activeKeep.description }}</p>

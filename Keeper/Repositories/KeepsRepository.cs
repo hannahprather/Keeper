@@ -97,5 +97,15 @@ namespace Keeper.Repositories
       WHERE k.creatorId = @accountId;";
       return _db.Query<Keep, Account, Keep>(sql, (keep, profile) => { keep.Creator = profile; return keep; }, new { accountId }, splitOn: "id");
     }
+
+    internal void IncreaseViews(int id)
+    {
+      string sql = @"
+      UPDATE keeps
+      SET views = views + 1
+      WHERE id = @id LIMIT 1;
+      ";
+      _db.Execute(sql, new { id });
+    }
   }
 }

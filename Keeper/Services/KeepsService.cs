@@ -31,6 +31,8 @@ namespace Keeper.Services
       {
         throw new Exception("does not exist doggie");
       }
+      _kRepo.IncreaseViews(id);
+      found.Views++;
       return found;
     }
 
