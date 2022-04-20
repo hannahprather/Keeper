@@ -25,10 +25,10 @@ namespace Keeper.Services
       return vkData;
     }
 
-    internal object GetKeepsByVaultId(int id)
-    {
-      return _vkRepo.GetKeepsByVaultId(id);
-    }
+    // internal object GetKeepsByVaultId(int id)
+    // {
+    //   return _vkRepo.GetKeepsByVaultId(id);
+    // }
 
     internal VaultKeep GetKeepById(int id)
     {

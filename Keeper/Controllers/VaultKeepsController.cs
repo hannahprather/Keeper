@@ -37,18 +37,18 @@ namespace Keeper.Controllers
       }
     }
 
-    [HttpGet("{id}")]
-    public ActionResult<List<VaultKeep>> GetKeepByVaultId(int id)
-    {
-      try
-      {
-        return Ok(_vks.GetKeepsByVaultId(id));
-      }
-      catch (Exception e)
-      {
-        return BadRequest(e.Message);
-      }
-    }
+    // [HttpGet("{id}")]
+    // public ActionResult<List<VaultKeep>> GetKeepByVaultId(int id)
+    // {
+    //   try
+    //   {
+    //     return Ok(_vks.GetKeepsByVaultId(id));
+    //   }
+    //   catch (Exception e)
+    //   {
+    //     return BadRequest(e.Message);
+    //   }
+    // }
 
     [HttpGet("{id}")]
     public ActionResult<List<VaultKeep>> GetKeepById(int id)

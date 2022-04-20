@@ -64,11 +64,22 @@ namespace Keeper.Repositories
       JOIN accounts a
       ON v.creatorId = a.id
       WHERE v.creatorId = @accountId;";
-      return _db.Query<Vault, Account, Vault>(sql, (vault, account) => { vault.Creator = account; return vault; }, new { accountId }, splitOn: "id");
+      return _db.Query<Vault, Account, Vault>(sql, (v, a) => { v.Creator = a; return v; }, new { accountId }, splitOn: "id");
 
     }
+    //// why do i have two of almost the exact same things 
     // internal List<Vault> GetMyVaults(Account userInfo)
     // {
+    //   string sql =@"
+    //  SELECT v.*,
+    //   a.*
+    //   FROM vaults v
+    //   JOIN accounts a
+    //   ON v.creatorId = a.id
+    //   WHERE v.creatorId = @accountId;";
+    //   return _db.Query<Account, Vault, Account>(sql, (a,v) =>{ v.Creator = a; return v;}, new {creatorId}).ToList();
     // }
+    
+
   }
 }

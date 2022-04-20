@@ -51,8 +51,6 @@ class VaultsService {
       logger.error(error)
     }
   }
-
-
 }
 
 export const vaultsService = new VaultsService

@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using Dapper;
 using Keeper.Models;
 
@@ -23,7 +25,7 @@ namespace Keeper.Repositories
       return _db.ExecuteScalar<int>(sql, vkData);
     }
 
-    internal object GetKeepsByVaultId(int vaultId)
+    public List<VaultKeepViewModel> GetKeepsByVaultId(int vaultId)
     {
       string sql = @"
         SELECT k.*,
@@ -35,7 +37,9 @@ namespace Keeper.Repositories
         JOIN accounts a 
         ON a.id = k.creatorId
         WHERE vaultId = @VaultId;";
-      return _db.Query<VaultKeepViewModel, Account, VaultKeepViewModel>(sql, (keep, account) => { keep.Creator = account; return keep; }, new { vaultId }, splitOn: "id");
+      return _db.Query<VaultKeepViewModel, Account, VaultKeepViewModel>(sql, (vk, a) => { vk.Creator = a; return vk; }, new { vaultId }).ToList();
+
+
     }
 
     internal VaultKeep GetKeepById(int id)

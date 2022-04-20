@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Keeper.Models;
 using Keeper.Repositories;
@@ -9,10 +10,13 @@ namespace Keeper.Services
   {
     private readonly VaultsRepository _vRepo;
     private readonly AccountsRepository _repo;
-    public VaultsService(VaultsRepository vRepo, AccountsRepository repo)
+    private readonly VaultKeepsRepository _vkRepo;
+
+    public VaultsService(VaultsRepository vRepo, AccountsRepository repo, VaultKeepsRepository vkRepo)
     {
       _vRepo = vRepo;
       _repo = repo;
+      _vkRepo = vkRepo;
     }
 
     internal Vault Create(Vault vaultData)
@@ -90,11 +94,19 @@ namespace Keeper.Services
       return _vRepo.GetVaultsByAccount(accountId).ToList().FindAll(v => v.CreatorId == userId || v.CreatorId == accountId && v.IsPrivate == false);
     }
 
+    public List<VaultKeepViewModel> GetKeepsByVaultId(int id, string userId)
+    {
+      Vault vault = GetVaultById(id, userId);
+      return _vkRepo.GetKeepsByVaultId(id);
+    }
 
-    // internal List<Keep> GetMyVaults(Account userInfo)
-    //   {
-    //     return _vRepo.GetKeepsByAccount(userInfo).ToList().FindAll(k => k.CreatorId == userId || k.CreatorId == accountId);
-    //   }
+
+    // internal List<Vault> GetMyVaults(Account userInfo)
+    // {
+    //   Vault myVaults= _vRepo.GetMyVaults(userInfo.Id);
+    //   return myVaults;
+
+    // }
   }
 
 }

@@ -38,7 +38,7 @@ namespace Keeper.Controllers
 
     // [HttpGet("/vaults")]
     // [Authorize]
-    // public async Task<ActionResult<Account>> GetMyVaults()
+    // public async Task<ActionResult<List<Vault>>> GetMyVaults()
     // {
     //   try
     //   {

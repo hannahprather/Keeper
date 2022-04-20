@@ -17,11 +17,6 @@
   </div>
 </template>
 
-
-
-
-
-
 <script>
 import { AppState } from "../AppState";
 import { keepsService } from "../services/KeepsService";
@@ -33,6 +28,7 @@ export default {
     },
   },
   setup(props) {
+
     return {
       async setActive() {
         try {
@@ -44,7 +40,7 @@ export default {
           Pop.toast(error.message, 'error')
         }
 
-      }
+      },
     };
   },
 };

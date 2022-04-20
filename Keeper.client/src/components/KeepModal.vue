@@ -25,7 +25,7 @@
               <p>{{ activeKeep.description }}</p>
             </div>
 
-            <div class="d-flex justify-content-around">
+            <!-- <div class="d-flex justify-content-around">
               <div class="dropdown">
                 <button
                   class="btn btn-secondary dropdown-toggle"
@@ -49,7 +49,20 @@
                 </ul>
               </div>
               <i class="mdi mdi-delete text-dark" alt="views"></i>
-            </div>
+            </div> -->
+            <select
+              v-model="state.vaultId"
+              name=""
+              id=""
+              class=""
+              data-option-label="Select a Vault"
+              required
+            >
+              <option disabled value="">Select a vault</option>
+              <option v-for="v in userVaults" :key="v.id" :value="v.id">
+                {{ v.name }}
+              </option>
+            </select>
             <div
               class="d-flex p-info align-items-bottom selectable"
               @click="goToProfile(activeKeep.creator.id)"
@@ -73,19 +86,32 @@
 
 
 <script>
-import { computed, ref } from '@vue/reactivity'
+import { computed, reactive, ref } from '@vue/reactivity'
 import { AppState } from '../AppState.js'
 import { Modal } from 'bootstrap'
 import { useRouter } from 'vue-router'
+import { vaultKeepsService } from "../services/VaultKeepsService.js"
 export default {
   setup() {
     const router = useRouter()
     const keep = ref({})
+    const state = reactive({
+      vaultId: null
+    })
     return {
+      state,
+      userVaults: computed(() => AppState.profileVaults),
       activeKeep: computed(() => AppState.activeKeep),
       goToProfile(id) {
         Modal.getOrCreateInstance(document.getElementById('active-keep')).hide()
         router.push({ name: 'Profile', params: { id } })
+      },
+      addKeepToVault(vaultId, keepId) {
+        const newKeep = {
+          vaultId: vaultId,
+          keepId: keepId,
+        }
+        vaultKeepsService.addKeepToVault(newKeep)
       },
     }
   }
