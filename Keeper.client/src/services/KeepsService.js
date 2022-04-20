@@ -21,8 +21,11 @@ class KeepsService {
 
   async createKeep(keepData) {
     try {
-      await api.post('spi/keeps', keepData)
+      const res = await api.post('api/keeps', keepData)
+      AppState.keeps.push(res.data)
+      console.log("YO", AppState.keeps);
       this.getAll()
+      return res.data
     } catch (error) {
       logger.error(error)
 
