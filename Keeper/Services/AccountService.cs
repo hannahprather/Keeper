@@ -58,14 +58,6 @@ namespace Keeper.Services
 
     }
 
-    //  internal object GetMyVaults(Account userInfo)
-    //  {
-    //    Account vaults = _repo.GetMyVaults(userInfo);
-    //    if 
-    //     {
-    //       throw new Exception("does not exist doggie");
-    //     }
-    //     return vaults;
-    //   }
+
   }
 }

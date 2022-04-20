@@ -66,12 +66,12 @@ namespace Keeper.Controllers
       }
     }
     [HttpGet("{profileId}")]
-    public async Task<ActionResult<Account>> GetProfileById(string accountId)
+    public async Task<ActionResult<Account>> GetProfileById(string profileId)
     {
       try
       {
         Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
-        return Ok(_accountservice.GetProfileById(accountId));
+        return Ok(_accountservice.GetProfileById(profileId));
       }
       catch (Exception e)
       {

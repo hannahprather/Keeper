@@ -5,10 +5,12 @@
     data-bs-target="#active-keep"
     @click="setActive"
   >
-    <div class="card bg-dark text-white">
-      <img :src="keep.img" class="card-img" alt="..." />
+    <div class="card bg-dark p-0 text-white">
+      <img :src="keep.img" class="card-img p-0" alt="..." />
       <div class="card-img-overlay">
-        <h5 class="card-title">{{ keep.name }}</h5>
+        <div class="selectable">
+          <h5 class="card-title align-items-end">{{ keep.name }}</h5>
+        </div>
         <p class="card-text"></p>
       </div>
     </div>

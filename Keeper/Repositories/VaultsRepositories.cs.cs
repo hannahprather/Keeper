@@ -67,6 +67,8 @@ namespace Keeper.Repositories
       return _db.Query<Vault, Account, Vault>(sql, (vault, account) => { vault.Creator = account; return vault; }, new { accountId }, splitOn: "id");
 
     }
-
+    // internal List<Vault> GetMyVaults(Account userInfo)
+    // {
+    // }
   }
 }

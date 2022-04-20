@@ -56,10 +56,13 @@ namespace Keeper.Repositories
       string sql = @"
       SELECT * FROM
       accounts
-      WHERE id = @AccountId;";
+      Where id = @accountId;";
       return _db.QueryFirstOrDefault<Account>(sql, new { accountId });
     }
 
 
+    // internal Account GetMyVaults()
+    // {
+    // }
   }
 }

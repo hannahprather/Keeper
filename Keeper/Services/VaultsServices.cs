@@ -90,5 +90,11 @@ namespace Keeper.Services
       return _vRepo.GetVaultsByAccount(accountId).ToList().FindAll(v => v.CreatorId == userId || v.CreatorId == accountId && v.IsPrivate == false);
     }
 
+
+    // internal List<Keep> GetMyVaults(Account userInfo)
+    //   {
+    //     return _vRepo.GetKeepsByAccount(userInfo).ToList().FindAll(k => k.CreatorId == userId || k.CreatorId == accountId);
+    //   }
   }
+
 }
