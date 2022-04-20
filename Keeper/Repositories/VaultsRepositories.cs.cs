@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using Dapper;
 using Keeper.Models;
 
@@ -58,7 +59,8 @@ namespace Keeper.Repositories
     internal IEnumerable<Vault> GetVaultsByAccount(string accountId)
     {
       string sql = @"
-      SELECT v.*,
+      SELECT 
+      v.*,
       a.*
       FROM vaults v
       JOIN accounts a
@@ -67,19 +69,20 @@ namespace Keeper.Repositories
       return _db.Query<Vault, Account, Vault>(sql, (v, a) => { v.Creator = a; return v; }, new { accountId }, splitOn: "id");
 
     }
-    //// why do i have two of almost the exact same things 
-    // internal List<Vault> GetMyVaults(Account userInfo)
-    // {
-    //   string sql =@"
-    //  SELECT v.*,
-    //   a.*
-    //   FROM vaults v
-    //   JOIN accounts a
-    //   ON v.creatorId = a.id
-    //   WHERE v.creatorId = @accountId;";
-    //   return _db.Query<Account, Vault, Account>(sql, (a,v) =>{ v.Creator = a; return v;}, new {creatorId}).ToList();
-    // }
-    
+    // why do i have two of almost the exact same things
+    internal List<Vault> GetMyVaults(string creatorId)
+    {
+      string sql = @"
+     SELECT 
+      v.*,
+      a.*
+      FROM vaults v
+      JOIN accounts a
+      ON v.creatorId = a.id
+      WHERE v.creatorId = @creatorId;";
+      return _db.Query<Vault, Account, Vault>(sql, (v, a) => { v.Creator = a; return v; }, new { creatorId }).ToList();
+    }
+    ///////whyyyyyyyyyyyyyyyyyyyy
 
   }
 }

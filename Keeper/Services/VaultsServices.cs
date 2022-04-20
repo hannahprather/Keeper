@@ -101,12 +101,11 @@ namespace Keeper.Services
     }
 
 
-    // internal List<Vault> GetMyVaults(Account userInfo)
-    // {
-    //   Vault myVaults= _vRepo.GetMyVaults(userInfo.Id);
-    //   return myVaults;
-
-    // }
+    internal List<Vault> GetMyVaults(Account userInfo)
+    {
+      List<Vault> myVaults = _vRepo.GetMyVaults(userInfo.Id);
+      return myVaults;
+    }
   }
 
 }
