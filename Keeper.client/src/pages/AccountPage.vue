@@ -44,6 +44,37 @@
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
+  <span>----------------</span>
+  <form @submit="createVault">
+    <div class="form-group">
+      <label for="exampleInputEmail1">Name:</label>
+      <input
+        type="name"
+        class="form-control"
+        placeholder="Entter Vault Name"
+        v-model="state.newVault.name"
+      />
+    </div>
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <input
+        type="description"
+        class="form-control"
+        placeholder="Vault Description"
+        v-model="state.newVault.description"
+      />
+    </div>
+    <div class="form-check">
+      <input
+        type="checkbox"
+        class="form-check-input"
+        id="exampleCheck1"
+        v-model="state.newVault.isPrivate"
+      />
+      <label class="form-check-label" for="exampleCheck1">Is Private</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
 </template>
 
 <script>
@@ -52,11 +83,17 @@ import { AppState } from '../AppState'
 import { keepsService } from "../services/KeepsService"
 import { logger } from "../utils/Logger"
 import Pop from "../utils/Pop"
+import { vaultsService } from "../services/VaultsService"
 export default {
   name: 'Account',
   setup() {
     const state = reactive({
-      newKeep: {}
+      newKeep: {},
+      newVault: {
+        name: "",
+        description: "",
+        isPrivate: false,
+      }
     })
     return {
       state,
@@ -65,6 +102,16 @@ export default {
         try {
           const created = await keepsService.createKeep(state.newKeep)
           state.newKeep = {}
+        } catch (error) {
+          logger.log(error)
+          Pop.toast(error.message, "error");
+        }
+
+      },
+      async createVault() {
+        try {
+          await vaultsService.createVault(state.newVault)
+          state.newVault = {}
         } catch (error) {
           logger.log(error)
           Pop.toast(error.message, "error");
