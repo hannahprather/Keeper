@@ -16,13 +16,15 @@
               <h3 class="text-center">
                 {{ activeKeep.name }}
               </h3>
-              <div class="d-flex justify-content-around">
+              <div class="d-flex py-4 justify-content-around">
                 <i class="mdi mdi-eye text-danger" alt="views">
                   {{ activeKeep.views }}
                 </i>
-                <i class="mdi mdi-key text-danger" alk="saves"></i>
+                <i class="mdi mdi-key text-danger" alk="saves">
+                  {{ activeKeep.kept }}</i
+                >
               </div>
-              <p>{{ activeKeep.description }}</p>
+              <p class="py-4">{{ activeKeep.description }}</p>
             </div>
 
             <!-- <div class="d-flex justify-content-around">
@@ -52,6 +54,7 @@
             </div> -->
             <select
               v-model="state.vaultId"
+              @change="addKeepToVault(activeKeep.id)"
               name=""
               id=""
               class=""
@@ -63,6 +66,12 @@
                 {{ v.name }}
               </option>
             </select>
+            <i
+              v-if="account.id == activeKeep.creatorId"
+              class="mdi mdi-delete selectable px-3"
+              title="delete"
+              @click="deleteKeep(activeKeep.id)"
+            ></i>
             <div
               class="d-flex p-info align-items-bottom selectable"
               @click="goToProfile(activeKeep.creator.id)"
@@ -91,27 +100,46 @@ import { AppState } from '../AppState.js'
 import { Modal } from 'bootstrap'
 import { useRouter } from 'vue-router'
 import { vaultKeepsService } from "../services/VaultKeepsService.js"
+import { logger } from "../utils/Logger.js"
+import Pop from "../utils/Pop.js"
+import { keepsService } from "../services/KeepsService.js"
 export default {
-  setup() {
+  props: {
+    keep: {
+      type: Object,
+      required: true
+    }
+  },
+  setup(props) {
     const router = useRouter()
     const keep = ref({})
     const state = reactive({
-      vaultId: null
+      vaultId: null,
+      keepId: null
     })
     return {
       state,
-      userVaults: computed(() => AppState.profileVaults),
+      userVaults: computed(() => AppState.myVaults),
       activeKeep: computed(() => AppState.activeKeep),
+      account: computed(() => AppState.account),
       goToProfile(id) {
         Modal.getOrCreateInstance(document.getElementById('active-keep')).hide()
         router.push({ name: 'Profile', params: { id } })
       },
-      addKeepToVault(vaultId, keepId) {
-        const newKeep = {
-          vaultId: vaultId,
-          keepId: keepId,
+      async addKeepToVault(keepId) {
+        try {
+          state.keepId = keepId
+          // logger.log(state)
+          await vaultKeepsService.addKeepToVault(state)
+          Pop.toast("added keep to vault")
+        } catch (error) {
+          logger.log(error)
         }
-        vaultKeepsService.addKeepToVault(newKeep)
+
+      },
+      async deleteKeep(id) {
+        logger.log("deleting from deleter", id)
+        await keepsService.deleteKeep(id);
       },
     }
   }

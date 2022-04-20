@@ -39,11 +39,11 @@ export default {
           logger.error(error)
           Pop.toast(error.message, 'error')
         }
-
       },
+
     };
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>

@@ -34,6 +34,7 @@ namespace Keeper.Services
       _kRepo.IncreaseViews(id);
       found.Views++;
       return found;
+      //NOTE do this for the kept on create vaultkeep
     }
 
     internal Keep Update(Keep updateData)

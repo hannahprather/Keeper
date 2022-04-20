@@ -1,80 +1,82 @@
 <template>
-  <div class="about pt-2 px-4 pl-4">
-    <img class="rounded" :src="account.picture" alt="" />
-    <p>{{ account.email }}</p>
-  </div>
-  <div class="px-5">
-    <h2>Vaults:</h2>
-    {{}}
-    <h2>Keeps:</h2>
-  </div>
-
-  <form @submit="createKeep">
-    <div class="form-group">
-      <label for="exampleInputEmail1">Name</label>
-      <input
-        type="text"
-        class="form-control"
-        id="keepName"
-        aria-describedby="keepName"
-        placeholder="Name"
-        v-model="state.newKeep.name"
-      />
+  <div class="continer-fluid">
+    <div class="about pt-2 px-4 pl-4">
+      <img class="rounded" :src="account.picture" alt="" />
+      <p>{{ account.email }}</p>
     </div>
-    <div class="form-group">
-      <label for="exampleInputPassword1">Description</label>
-      <input
-        type="text"
-        class="form-control"
-        id="keepDescription"
-        placeholder="Description"
-        v-model="state.newKeep.description"
-      />
+    <div class="px-5">
+      <h2>Vaults:</h2>
+
+      <h2>Keeps:</h2>
+    </div>
+
+    <form @submit="createKeep">
       <div class="form-group">
-        <label for="exampleInputEmail1">Image URL</label>
+        <label for="exampleInputEmail1">Name</label>
         <input
           type="text"
           class="form-control"
-          id="keepImageUrl"
-          aria-describedby="keepImageUrl"
-          placeholder="Image URL"
-          v-model="state.newKeep.img"
+          id="keepName"
+          aria-describedby="keepName"
+          placeholder="Name"
+          v-model="state.newKeep.name"
         />
       </div>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
-  <span>----------------</span>
-  <form @submit="createVault">
-    <div class="form-group">
-      <label for="exampleInputEmail1">Name:</label>
-      <input
-        type="name"
-        class="form-control"
-        placeholder="Entter Vault Name"
-        v-model="state.newVault.name"
-      />
-    </div>
-    <div class="form-group">
-      <label for="description">Description:</label>
-      <input
-        type="description"
-        class="form-control"
-        placeholder="Vault Description"
-        v-model="state.newVault.description"
-      />
-    </div>
-    <div class="form-check">
-      <input
-        type="checkbox"
-        class="form-check-input"
-        id="exampleCheck1"
-        v-model="state.newVault.isPrivate"
-      />
-      <label class="form-check-label" for="exampleCheck1">Is Private</label>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Description</label>
+        <input
+          type="text"
+          class="form-control"
+          id="keepDescription"
+          placeholder="Description"
+          v-model="state.newKeep.description"
+        />
+        <div class="form-group">
+          <label for="exampleInputEmail1">Image URL</label>
+          <input
+            type="text"
+            class="form-control"
+            id="keepImageUrl"
+            aria-describedby="keepImageUrl"
+            placeholder="Image URL"
+            v-model="state.newKeep.img"
+          />
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <span>----------------</span>
+    <form @submit="createVault">
+      <div class="form-group">
+        <label for="exampleInputEmail1">Name:</label>
+        <input
+          type="name"
+          class="form-control"
+          placeholder="Entter Vault Name"
+          v-model="state.newVault.name"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <input
+          type="description"
+          class="form-control"
+          placeholder="Vault Description"
+          v-model="state.newVault.description"
+        />
+      </div>
+      <div class="form-check">
+        <input
+          type="checkbox"
+          class="form-check-input"
+          id="exampleCheck1"
+          v-model="state.newVault.isPrivate"
+        />
+        <label class="form-check-label" for="exampleCheck1">Is Private</label>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
 </template>
 
 <script>

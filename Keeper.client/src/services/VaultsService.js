@@ -12,6 +12,15 @@ class VaultsService {
       logger.error(error)
     }
   }
+  async getMyVaults() {
+    try {
+      const res = await api.get('account/vaults')
+      AppState.myVaults = res.data
+      logger.log('my vaults', res.data)
+    } catch (error) {
+      logger.error(error)
+    }
+  }
 
   // async getProfileVaults(id) {
   //   try {
@@ -37,7 +46,6 @@ class VaultsService {
   async deleteVault(id) {
     try {
       await api.delete(`api/vaults/${id}`)
-      this.getVaults()
     } catch (error) {
       logger.error(error)
     }

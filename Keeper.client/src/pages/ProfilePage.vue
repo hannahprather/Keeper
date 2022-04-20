@@ -5,7 +5,6 @@
       <h1>{{ profile.name }}</h1>
     </div>
     <h2>Vaults:</h2>
-
     <div v-for="v in profileVaults" :key="v.id" @click="setActiveVault(v.id)">
       <div class="col-3">
         <div

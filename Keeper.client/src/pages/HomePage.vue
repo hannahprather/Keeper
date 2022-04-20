@@ -1,7 +1,9 @@
 <template>
   <div class="container">
     <div class="masonry-with-columns py-2">
-      <keeps v-for="k in keeps" :key="k.id" :keep="k" />
+      <div v-for="k in keeps" :key="k.id">
+        <Keeps :keep="k" />
+      </div>
     </div>
   </div>
 </template>
