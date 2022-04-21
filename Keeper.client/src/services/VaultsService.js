@@ -1,6 +1,7 @@
 import { AppState } from "../AppState"
 import { router } from "../router"
 import { logger } from "../utils/Logger"
+import Pop from "../utils/Pop"
 import { api } from "./AxiosService"
 
 class VaultsService {
@@ -57,6 +58,8 @@ class VaultsService {
       AppState.activeVault = res.data
     } catch (error) {
       logger.error(error)
+      Pop.toast("HANDS UP! *shoots gun, blows off smoke, twirls... holsters")
+      router.push({ name: 'Home', params: { id } })
     }
   }
 }

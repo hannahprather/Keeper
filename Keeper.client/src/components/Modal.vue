@@ -24,3 +24,9 @@
     </div>
   </div>
 </template>
+
+<style lang="scss" scoped>
+.modal-xl {
+  max-width: 90vw !important;
+}
+</style>

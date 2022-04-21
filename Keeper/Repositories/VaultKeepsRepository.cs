@@ -29,7 +29,7 @@ namespace Keeper.Repositories
     {
       string sql = @"
       UPDATE keeps
-      SET keeps = kept + 1
+      SET kept = kept + 1
       WHERE id = @id LIMIT 1;
       ";
       _db.Execute(sql, new { id });

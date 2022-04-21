@@ -1,7 +1,7 @@
 <template>
   <Modal id="active-keep">
     <template #modal-body>
-      <div class="container">
+      <div class="container-fluid">
         <div class="row">
           <div class="col-md-6 p-4 rounded">
             <img
@@ -18,74 +18,54 @@
               </h3>
               <div class="d-flex py-4 justify-content-around">
                 <i class="mdi mdi-eye text-danger" alt="views">
-                  {{ activeKeep.views }}
-                </i>
+                  {{ activeKeep.views }} </i
+                ><i
+                  v-if="account.id == activeKeep.creatorId"
+                  class="mdi mdi-delete selectable px-3"
+                  title="delete"
+                  @click="deleteKeep(activeKeep.id)"
+                ></i>
                 <i class="mdi mdi-key text-danger" alk="saves">
                   {{ activeKeep.kept }}</i
                 >
               </div>
               <p class="py-4">{{ activeKeep.description }}</p>
             </div>
-
-            <!-- <div class="d-flex justify-content-around">
-              <div class="dropdown">
-                <button
-                  class="btn btn-secondary dropdown-toggle"
-                  type="button"
-                  id="dropdownMenu2"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
+            <!-- buttons -->
+            <div class="">
+              <div class="d-flex absolute1 w-100 align-items-center">
+                <select
+                  v-model="state.vaultId"
+                  @change="addKeepToVault(activeKeep.id)"
+                  name=""
+                  id=""
+                  class="h-25"
+                  data-option-label="Select a Vault"
+                  required
                 >
-                  + To Your Vault
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                  <li>
-                    <button class="dropdown-item" type="button">vaults</button>
-                  </li>
-                  <li>
-                    <button class="dropdown-item" type="button">vault</button>
-                  </li>
-                  <li>
-                    <button class="dropdown-item" type="button">vault</button>
-                  </li>
-                </ul>
+                  <option disabled value="">Select a vault</option>
+                  <option v-for="v in userVaults" :key="v.id" :value="v.id">
+                    {{ v.name }}
+                  </option>
+                </select>
+
+                <div
+                  class="selectable p-2 d-flex"
+                  @click="goToProfile(activeKeep.creator.id)"
+                >
+                  <img
+                    height="50"
+                    class="w-70 object-fit-cover rounded"
+                    :src="activeKeep.creator?.picture"
+                    alt=""
+                  />
+                  <p class="p-2 text-small">
+                    {{ activeKeep.creator?.name }}
+                  </p>
+                </div>
               </div>
-              <i class="mdi mdi-delete text-dark" alt="views"></i>
-            </div> -->
-            <select
-              v-model="state.vaultId"
-              @change="addKeepToVault(activeKeep.id)"
-              name=""
-              id=""
-              class=""
-              data-option-label="Select a Vault"
-              required
-            >
-              <option disabled value="">Select a vault</option>
-              <option v-for="v in userVaults" :key="v.id" :value="v.id">
-                {{ v.name }}
-              </option>
-            </select>
-            <i
-              v-if="account.id == activeKeep.creatorId"
-              class="mdi mdi-delete selectable px-3"
-              title="delete"
-              @click="deleteKeep(activeKeep.id)"
-            ></i>
-            <div
-              class="d-flex p-info align-items-bottom selectable"
-              @click="goToProfile(activeKeep.creator.id)"
-            >
-              <img
-                height="50"
-                class="w-70 object-fit-cover rounded"
-                :src="activeKeep.creator?.picture"
-                alt=""
-              />
-              <p class="p-2 text-small">
-                {{ activeKeep.creator?.name }}
-              </p>
             </div>
+            <!-- end buttons -->
           </div>
         </div>
       </div>
@@ -159,5 +139,10 @@ export default {
 .v-add {
   position: fixed;
   bottom: 30%;
+}
+.absolute1 {
+  position: absolute;
+  width: 50%;
+  bottom: 10px;
 }
 </style>
