@@ -8,8 +8,18 @@
     <div class="card bg-dark p-0 text-white">
       <img :src="keep.img" class="card-img p-0" alt="..." />
       <div class="card-img-overlay">
-        <div class="selectable">
-          <h5 class="card-title align-items-end">{{ keep.name }}</h5>
+        <div class="selectable absolute1">
+          <div class="">
+            <h5 class="card-title">
+              {{ keep.name
+              }}<img
+                height="30"
+                class="w-30 px-2 rounded-circle"
+                :src="keep.creator.picture"
+                alt=""
+              />
+            </h5>
+          </div>
         </div>
         <p class="card-text"></p>
       </div>
@@ -54,5 +64,10 @@ export default {
     display: inline-block;
     width: 100%;
   }
+}
+.absolute1 {
+  position: absolute;
+  width: 50%;
+  bottom: 10px;
 }
 </style>

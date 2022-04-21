@@ -24,11 +24,8 @@ namespace Keeper.Services
       vkData.Id = _vkRepo.Create(vkData);
       return vkData;
     }
+    ///do i need to put the update keps count in the service??
 
-    // internal object GetKeepsByVaultId(int id)
-    // {
-    //   return _vkRepo.GetKeepsByVaultId(id);
-    // }
 
     internal VaultKeep GetKeepById(int id)
     {

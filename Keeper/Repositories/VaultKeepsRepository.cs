@@ -25,6 +25,16 @@ namespace Keeper.Repositories
       return _db.ExecuteScalar<int>(sql, vkData);
     }
 
+    internal void IncreaseKept(int id)
+    {
+      string sql = @"
+      UPDATE keeps
+      SET keeps = kept + 1
+      WHERE id = @id LIMIT 1;
+      ";
+      _db.Execute(sql, new { id });
+    }
+
     public List<VaultKeepViewModel> GetKeepsByVaultId(int vaultId)
     {
       string sql = @"
