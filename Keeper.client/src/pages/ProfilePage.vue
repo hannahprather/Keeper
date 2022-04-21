@@ -5,15 +5,22 @@
       <h1>{{ profile.name }}</h1>
     </div>
     <h2>Vaults:</h2>
-    <div v-for="v in profileVaults" :key="v.id" @click="setActiveVault(v.id)">
-      <div class="col-3">
-        <div
-          class="card text-white selectable elevation-2 bg-dark mb-3"
-          style="max-width: 18rem"
-        >
-          <div class="card-body">
-            <div class="d-flex flex-column align-items-center">
-              <h5 class="card-title">{{ v.name }}</h5>
+    <div class="row d-flexs">
+      <div
+        v-for="v in profileVaults"
+        :key="v.id"
+        class="col-3"
+        @click="setActiveVault(v.id)"
+      >
+        <div class="">
+          <div
+            class="card text-white selectable elevation-2 bg-dark mb-3"
+            style="max-width: 18rem"
+          >
+            <div class="card-body">
+              <div class="d-flex flex-column align-items-center">
+                <h5 class="card-title">{{ v.name }}</h5>
+              </div>
             </div>
           </div>
         </div>

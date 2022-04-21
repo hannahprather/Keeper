@@ -22,6 +22,7 @@ namespace Keeper.Services
         throw new Exception("nooo surrrr, not today");
       }
       vkData.Id = _vkRepo.Create(vkData);
+      _vkRepo.IncreaseKept(vkData.KeepId);
       return vkData;
     }
     ///do i need to put the update keps count in the service??
